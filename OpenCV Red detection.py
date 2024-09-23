@@ -11,7 +11,7 @@ while True:
     low_red = np.array([161, 155, 84]) # Remember to change these colour values to suit classroom environment (blue carpet, white walls etc)
     high_red = np.array([179, 255, 255])
     red_mask = cv2.inRange(hsv_frame, low_red, high_red) # This should create a colour mask so red is white and everything else is black
-    _, contours, bababababa = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # Basically finds objects (OpenCV is magic)
+    contours, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # Basically finds objects (OpenCV is magic)
     contours = sorted(contours, key=lambda x:cv2.contourArea(x), reverse=True) # Sorts objects/contours from big to small
 
     for a in contours:
