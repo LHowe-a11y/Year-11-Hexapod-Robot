@@ -1,8 +1,9 @@
-import cv2
+import cv2 # type: ignore
 import numpy as np
 from picamera2 import Picamera2 # type: ignore
 from Control import * # type: ignore
 from Ultrasonic import * # type: ignore
+import time
 
 ultrasonic = Ultrasonic() # type: ignore
 c=Control() # type: ignore
@@ -48,20 +49,23 @@ while True:
     if (x_midpoint - leniency) > x_centre:
         data=['CMD_MOVE', '1', '-35', '0', '8', '10']
         c.run(data)
+        time.sleep(0.2)
     elif (x_midpoint + leniency) < x_centre:
         data=['CMD_MOVE', '1', '35', '0', '8', '-10']
         c.run(data)
+        time.sleep(0.2)
     elif foundred == True:
         break
 
     if cv2.waitKey(1)==ord('q'):
         break
-
+cv2.destroyAllWindows()
 # Move forwards
 data=['CMD_MOVE', '1', '0', '35', '10', '0']
 i=0
 while True:
     for a in range(3):
+        time.sleep(0.1)
         x = ultrasonic.getDistance()
         if x <= 20 and x != 0:
             i += 1
@@ -70,6 +74,6 @@ while True:
     else:
         i = 0
     c.run(data)
+    time.sleep(0.5)
 print('Stopped in front of object')
-cv2.destroyAllWindows()
 exit()
