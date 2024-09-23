@@ -60,6 +60,7 @@ while True:
     if cv2.waitKey(1)==ord('q'):
         break
 cv2.destroyAllWindows()
+print('Found target - moving forwards')
 # Move forwards
 data=['CMD_MOVE', '1', '0', '35', '10', '0']
 i=0
