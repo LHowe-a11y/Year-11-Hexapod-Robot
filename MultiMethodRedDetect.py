@@ -24,6 +24,7 @@ x_centre = x_midpoint # Sets middle
 while True:
     im= picam2.capture_array()
     hsv_frame = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
+    x_midpoint = 0 # Temporary to resolve issues
 
     low_red = np.array([161, 155, 84]) # Remember to change these colour values to suit classroom environment (blue carpet, white walls etc)
     high_red = np.array([179, 255, 255])
@@ -39,7 +40,7 @@ while True:
         x_midpoint = (x+x+w)/2
         break # So only the biggest one gets considered
 
-    cv2.line(im, (x_midpoint, 0), (x_midpoint, 480), (245, 169, 184), 2) # Draws a midpoint line for the object
+    #cv2.line(im, (x_midpoint, 0), (x_midpoint, 480), (245, 169, 184), 2) # Draws a midpoint line for the object
 
     cv2.imshow("Camera", im)
     cv2.imshow("Mask", red_mask)

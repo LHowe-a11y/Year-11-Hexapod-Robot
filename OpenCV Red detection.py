@@ -11,7 +11,7 @@ while True:
     low_red = np.array([161, 155, 84]) # Remember to change these colour values to suit classroom environment (blue carpet, white walls etc)
     high_red = np.array([179, 255, 255])
     red_mask = cv2.inRange(hsv_frame, low_red, high_red) # This should create a colour mask so red is white and everything else is black
-    contours, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # Basically finds objects (OpenCV is magic)
+    _, contours, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) # Basically finds objects (OpenCV is magic)
     contours = sorted(contours, key=lambda x:cv2.contourArea(x), reverse=True) # Sorts objects/contours from big to small
 
     for a in contours:
@@ -21,7 +21,7 @@ while True:
         y_midpoint = (y+y+h)/2
         break # So only the biggest one gets considered
 
-    cv2.line(frame, (x_midpoint, 0), (x_midpoint, 480), (245, 169, 184), 2) # Draws a midpoint line for the object
+    cv2.line(frame, (x_midpoint, 0), (x_midpoint, 480), (245, 169, 184), 2) # Draws a midpoint line
 
 
     cv2.imshow("Frame", frame) # These create visual windows, will use for debugging but probably remove for final version
